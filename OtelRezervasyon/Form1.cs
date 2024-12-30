@@ -60,5 +60,34 @@ namespace OtelRezervasyon
             MessageBox.Show("Kayıt Silindi");
             doldur();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int Id = Convert.ToInt16(textBox3.Text);
+            var tablom = conn.Admin.Where(x => x.UserId == Id).FirstOrDefault();
+            tablom.UserName = textBox1.Text;
+            tablom.UserPassword = textBox2.Text;
+            tablom.Authority = comboBox1.Text;
+            conn.SaveChanges();
+            doldur();
+            MessageBox.Show("Kayıt Düzeldi");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(textBox1.Text))
+            {
+                MessageBox.Show("Boş Bırakamazsınız");
+                textBox1.Focus();
+                textBox1.BackColor = Color.Teal;
+            }
+            else
+            {
+                string usersearch = textBox1.Text;
+                var tablo = conn.Admin.Where(x => x.UserName.Contains(usersearch)).ToList();
+                dataGridView1.DataSource = tablo;
+            }
+          
+        }
     }
 }
