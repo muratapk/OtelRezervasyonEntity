@@ -34,5 +34,7 @@ namespace OtelRezervasyon
         public virtual DbSet<Personel> Personel { get; set; }
         public virtual DbSet<Rooms> Rooms { get; set; }
         public virtual DbSet<Services> Services { get; set; }
+        public virtual DbSet<Bill> Bill { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }
