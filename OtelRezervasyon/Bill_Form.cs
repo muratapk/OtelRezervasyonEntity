@@ -57,9 +57,15 @@ namespace OtelRezervasyon
         }
         private void doldur()
         {
-            dataGridView1.DataSource = (from a in db.Bill select a).ToList();
+           // dataGridView1.DataSource = (from a in db.Bill select a).ToList();
             //dataGridView1.DataSource = db.Bill.ToList();
             //linq komut ile çalış komut
+            var liste=(from a in db.Bill join b in db.Services on a.ServiceId equals b.ServiceId
+                       join c in db.Customer on a.CustomerId equals c.CustomerId
+                       join d in db.Rooms on a.RoomId equals d.RoomId join e in db.HotelService
+                       on a.HotelServiceId equals e.HotelServiceId
+                       select new {a.BillId,b.ServiceName, b.ServiceId, c.CustomerName,c.CustomerId,d.RoomId,d.RoomType,e.HotelServiceId,e.HotelServiceName}).ToList();
+            dataGridView1.DataSource= liste;
         }
     }
 }
